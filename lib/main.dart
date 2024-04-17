@@ -4,5 +4,8 @@ import 'package:pcp/app_module.dart';
 import 'package:pcp/app_widget.dart';
 
 void main() {
-  runApp(ModularApp(module: AppModule(), child: AppWidget()));
+  runApp(ModularApp(
+    module: AppModule(),
+    child: const AppWidget(),
+  ));
 }

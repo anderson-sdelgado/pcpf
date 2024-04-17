@@ -1,0 +1,11 @@
+// STYLE
+const FONT_SIZE_TITLE_LIST = 28.0;
+const FONT_SIZE_ITEM_LIST = 22.0;
+
+// URL
+const URL_MENU_INICIAL = '/';
+const URL_SENHA = '/senha';
+const URL_CONFIG = '/config';
+
+// TABELA SHARE PREFERENCE
+const BASE_SHARE_PREFERENCES_TABLE_CONFIG = "config";
