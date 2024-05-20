@@ -4,13 +4,12 @@ import 'package:pcp/domain/errors/errors.dart';
 import 'package:pcp/domain/repositories/variable/config_repository.dart';
 
 abstract class SendInitialConfig {
-  Future<Either<Failure, num>> call(
-    String nroAparelho,
-    String senha,
-    String version,
-  );
+  Future<Either<Failure, num>> call({
+    required String nroAparelho,
+    required String senha,
+    required String version,
+  });
 }
-
 
 class SendInitialConfigImpl implements SendInitialConfig {
   final ConfigRepository configRepository;
@@ -18,16 +17,17 @@ class SendInitialConfigImpl implements SendInitialConfig {
   SendInitialConfigImpl(this.configRepository);
 
   @override
-  Future<Either<Failure, num>> call(
-    String nroAparelho,
-    String senha,
-    String version,
-  ) async {
+  Future<Either<Failure, num>> call({
+    required String nroAparelho,
+    required String senha,
+    required String version,
+  }) {
     final config = Config(
       nroAparelhoConfig: int.parse(nroAparelho),
       passwordConfig: senha,
       version: version,
     );
-    return configRepository.sendConfig(config);
+    return configRepository.send(config);
   }
+
 }

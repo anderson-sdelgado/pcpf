@@ -1,7 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
+import 'package:equatable/equatable.dart';
 import 'package:pcp/utils/enum.dart';
 
-class Config {
+class Config with EquatableMixin {
   final num? nroAparelhoConfig;
   final String? passwordConfig;
   final num? idBDConfig;
@@ -16,35 +18,21 @@ class Config {
     this.passwordConfig,
     this.idBDConfig,
     this.version,
-    this.flagUpdate = FlagUpdate.OUTDATED,
+    this.flagUpdate,
     this.matricVigia,
     this.idLocal,
-    this.statusEnvio = StatusSend.SENT,
+    this.statusEnvio,
   });
 
   @override
-  bool operator ==(covariant Config other) {
-    if (identical(this, other)) return true;
-
-    return other.nroAparelhoConfig == nroAparelhoConfig &&
-        other.passwordConfig == passwordConfig &&
-        other.idBDConfig == idBDConfig &&
-        other.version == version &&
-        other.flagUpdate == flagUpdate &&
-        other.matricVigia == matricVigia &&
-        other.idLocal == idLocal &&
-        other.statusEnvio == statusEnvio;
-  }
-
-  @override
-  int get hashCode {
-    return nroAparelhoConfig.hashCode ^
-        passwordConfig.hashCode ^
-        idBDConfig.hashCode ^
-        version.hashCode ^
-        flagUpdate.hashCode ^
-        matricVigia.hashCode ^
-        idLocal.hashCode ^
-        statusEnvio.hashCode;
-  }
+  List<Object?> get props => [
+        nroAparelhoConfig,
+        passwordConfig,
+        idBDConfig,
+        version,
+        flagUpdate,
+        matricVigia,
+        idLocal,
+        statusEnvio,
+      ];
 }

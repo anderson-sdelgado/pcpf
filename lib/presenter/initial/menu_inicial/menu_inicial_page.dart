@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pcp/app_module.dart';
 import 'package:pcp/app_style.dart';
+import 'package:pcp/external/floor/app_database.dart';
 import 'package:pcp/utils/constant.dart';
+
+import '../../../external/floor/dao/colab_dao.dart';
 
 const KEY_APONT_MENU_INICIAL_ITEM = 'key_apont_menu_inicial_item';
 const KEY_CONFIG_MENU_INICIAL_ITEM = 'key_config_menu_inicial_item';
@@ -44,6 +48,7 @@ class _MenuInicialPageState extends State<MenuInicialPage> {
                         'APONTAMENTO',
                         style: style.itemListTextStyle,
                       ),
+                      onTap: () async => db(),
                     ),
                     ListTile(
                       title: Text(
@@ -51,7 +56,7 @@ class _MenuInicialPageState extends State<MenuInicialPage> {
                         'CONFIGURAÇÃO',
                         style: style.itemListTextStyle,
                       ),
-                      onTap: () => Modular.to.navigate(URL_SENHA),
+                      onTap: () => context.go(URL_SENHA),
                     ),
                     ListTile(
                       title: Text(
@@ -70,4 +75,16 @@ class _MenuInicialPageState extends State<MenuInicialPage> {
       ),
     );
   }
+}
+
+void db() async {
+  // print("Rodou");
+  // final database = getIt<AppDatabase>();
+  // final dao = database.colabDao;
+  // dao.deleteAll();
+  // dao.insert(ColabFloorModel(
+  //   matricColab: 100,
+  //   nomeColab: "Anderson da Silva Delgado",
+  // ));
+  // print("Salvou");
 }

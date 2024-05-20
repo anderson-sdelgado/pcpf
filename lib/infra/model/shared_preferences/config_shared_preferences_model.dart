@@ -1,10 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
 import 'package:pcp/domain/entities/variable/config.dart';
 import 'package:pcp/utils/enum.dart';
 
-class ConfigSharedPreferencesModel extends Config {
+class ConfigSharedPreferencesModel with EquatableMixin {
   final num? nroAparelhoConfig;
   final String? passwordConfig;
   final num? idBDConfig;
@@ -24,6 +24,20 @@ class ConfigSharedPreferencesModel extends Config {
     this.idLocal,
     this.statusEnvio,
   });
+
+  factory ConfigSharedPreferencesModel.toConfigSharedPreferencesModel(
+      Config config) {
+    return ConfigSharedPreferencesModel(
+      nroAparelhoConfig: config.nroAparelhoConfig,
+      version: config.version,
+      idBDConfig: config.idBDConfig,
+      passwordConfig: config.passwordConfig,
+      flagUpdate: config.flagUpdate,
+      matricVigia: config.matricVigia,
+      idLocal: config.idLocal,
+      statusEnvio: config.statusEnvio,
+    );
+  }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -65,4 +79,16 @@ class ConfigSharedPreferencesModel extends Config {
   factory ConfigSharedPreferencesModel.fromJson(String source) =>
       ConfigSharedPreferencesModel.fromMap(
           json.decode(source) as Map<String, dynamic>);
+
+  @override
+  List<Object?> get props => [
+        nroAparelhoConfig,
+        passwordConfig,
+        idBDConfig,
+        version,
+        flagUpdate,
+        matricVigia,
+        idLocal,
+        statusEnvio,
+      ];
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pcp/app_style.dart';
+import 'package:pcp/app_router.dart';
 
 class AppWidget extends StatelessWidget {
-  const AppWidget({super.key});
+  final String urlInitial;
+  const AppWidget({super.key, this.urlInitial = "/"});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class AppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'PCP',
       theme: style.appStyle,
-      routerConfig: Modular.routerConfig,
+      routerConfig: router(urlInitial),
     );
   }
 }

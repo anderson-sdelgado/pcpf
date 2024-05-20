@@ -11,11 +11,11 @@ class CheckPasswordConfigImpl implements CheckPasswordConfig {
 
   @override
   Future<bool> call(String senha) async {
-    final hasConfig = await configRepository.hasConfig();
+    final hasConfig = await configRepository.has();
     if (!hasConfig) {
       return true;
     }
-    final senhaConfig = await configRepository.getSenhaConfig();
+    final senhaConfig = await configRepository.getSenha();
     if (senhaConfig == senha) {
       return true;
     }
