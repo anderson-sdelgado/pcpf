@@ -9,7 +9,7 @@ class LocalFloorModel extends Equatable {
   final int idLocal;
   final String descrLocal;
 
-  LocalFloorModel({
+  const LocalFloorModel({
     required this.idLocal,
     required this.descrLocal,
   });

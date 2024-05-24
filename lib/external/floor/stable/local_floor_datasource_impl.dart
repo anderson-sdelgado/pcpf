@@ -1,12 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:pcp/domain/errors/errors.dart';
 import 'package:pcp/external/floor/app_database.dart';
-import 'package:pcp/external/floor/dao/local_dao.dart';
 import 'package:pcp/infra/datasource/floor/stable/local_floor_datasource.dart';
 import 'package:pcp/infra/model/floor/stable/local_floor_model.dart';
 
 class LocalFloorDatasourceImpl implements LocalFloorDatasource {
-
   final AppDatabase appDatabase;
   LocalFloorDatasourceImpl(this.appDatabase);
 
@@ -16,7 +14,7 @@ class LocalFloorDatasourceImpl implements LocalFloorDatasource {
       final dao = appDatabase.localDao;
       await dao.deleteAll();
       return const Right(true);
-    } catch(ex) {
+    } catch (ex) {
       return Left(ErrorFloorDatasource(ex.toString()));
     }
   }
@@ -26,14 +24,13 @@ class LocalFloorDatasourceImpl implements LocalFloorDatasource {
     try {
       final dao = appDatabase.localDao;
       var result = await dao.insertAll(list);
-      if(list.length == result.length){
+      if (list.length == result.length) {
         return const Right(true);
       } else {
         return Left(ErrorFloorDatasource("Invalid insert count"));
       }
-    } catch(ex) {
+    } catch (ex) {
       return Left(ErrorFloorDatasource(ex.toString()));
     }
   }
-
 }

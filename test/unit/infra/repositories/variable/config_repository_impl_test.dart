@@ -6,6 +6,7 @@ import 'package:pcp/domain/errors/errors.dart';
 import 'package:pcp/infra/model/shared_preferences/config_shared_preferences_model.dart';
 import 'package:pcp/infra/model/web_service/variable/config_web_service_model.dart';
 import 'package:pcp/infra/repositories/variable/config_repository_impl.dart';
+import 'package:pcp/utils/enum.dart';
 
 import '../../datasource/mock_datasource.mocks.dart';
 
@@ -101,6 +102,14 @@ main() {
           (_) => Future(() => ConfigSharedPreferencesModel(version: '1.00')));
       var result = await confiRepositoryImpl.getVersion();
       expect(result, '1.00');
+    });
+
+    test('deve retornar FlagUpdate se tiver dados salvos de Config', () async {
+      when(configSharedPreferencesDatasource.getConfig()).thenAnswer((_) =>
+          Future(() =>
+              ConfigSharedPreferencesModel(flagUpdate: FlagUpdate.UPDATED)));
+      var result = await confiRepositoryImpl.getFlagUpdate();
+      expect(result, FlagUpdate.UPDATED);
     });
   });
 }

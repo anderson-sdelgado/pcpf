@@ -3,26 +3,27 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i5;
-import 'package:pcp/domain/entities/stable/colab.dart' as _i9;
-import 'package:pcp/domain/entities/stable/equip.dart' as _i11;
-import 'package:pcp/domain/entities/stable/local.dart' as _i13;
-import 'package:pcp/domain/entities/stable/terceiro.dart' as _i15;
-import 'package:pcp/domain/entities/stable/visitante.dart' as _i17;
-import 'package:pcp/domain/entities/variable/config.dart' as _i7;
-import 'package:pcp/domain/errors/errors.dart' as _i6;
-import 'package:pcp/domain/repositories/stable/colab_repository.dart' as _i8;
-import 'package:pcp/domain/repositories/stable/equip_repository.dart' as _i10;
-import 'package:pcp/domain/repositories/stable/local_repository.dart' as _i12;
+import 'package:mockito/src/dummies.dart' as _i6;
+import 'package:pcp/domain/entities/stable/colab.dart' as _i10;
+import 'package:pcp/domain/entities/stable/equip.dart' as _i12;
+import 'package:pcp/domain/entities/stable/local.dart' as _i14;
+import 'package:pcp/domain/entities/stable/terceiro.dart' as _i16;
+import 'package:pcp/domain/entities/stable/visitante.dart' as _i18;
+import 'package:pcp/domain/entities/variable/config.dart' as _i3;
+import 'package:pcp/domain/errors/errors.dart' as _i7;
+import 'package:pcp/domain/repositories/stable/colab_repository.dart' as _i9;
+import 'package:pcp/domain/repositories/stable/equip_repository.dart' as _i11;
+import 'package:pcp/domain/repositories/stable/local_repository.dart' as _i13;
 import 'package:pcp/domain/repositories/stable/terceiro_repository.dart'
-    as _i14;
+    as _i15;
 import 'package:pcp/domain/repositories/stable/visitante_repository.dart'
-    as _i16;
-import 'package:pcp/domain/repositories/variable/config_repository.dart' as _i3;
+    as _i17;
+import 'package:pcp/domain/repositories/variable/config_repository.dart' as _i4;
+import 'package:pcp/utils/enum.dart' as _i8;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -47,197 +48,232 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
         );
 }
 
+class _FakeConfig_1 extends _i1.SmartFake implements _i3.Config {
+  _FakeConfig_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [ConfigRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockConfigRepository extends _i1.Mock implements _i3.ConfigRepository {
+class MockConfigRepository extends _i1.Mock implements _i4.ConfigRepository {
   MockConfigRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<bool> has() => (super.noSuchMethod(
+  _i5.Future<bool> has() => (super.noSuchMethod(
         Invocation.method(
           #has,
           [],
         ),
-        returnValue: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
 
   @override
-  _i4.Future<String> getSenha() => (super.noSuchMethod(
+  _i5.Future<String> getSenha() => (super.noSuchMethod(
         Invocation.method(
           #getSenha,
           [],
         ),
-        returnValue: _i4.Future<String>.value(_i5.dummyValue<String>(
+        returnValue: _i5.Future<String>.value(_i6.dummyValue<String>(
           this,
           Invocation.method(
             #getSenha,
             [],
           ),
         )),
-      ) as _i4.Future<String>);
+      ) as _i5.Future<String>);
 
   @override
-  _i4.Future<num> getNroAparelho() => (super.noSuchMethod(
+  _i5.Future<num> getNroAparelho() => (super.noSuchMethod(
         Invocation.method(
           #getNroAparelho,
           [],
         ),
-        returnValue: _i4.Future<num>.value(0),
-      ) as _i4.Future<num>);
+        returnValue: _i5.Future<num>.value(0),
+      ) as _i5.Future<num>);
 
   @override
-  _i4.Future<String> getVersion() => (super.noSuchMethod(
+  _i5.Future<String> getVersion() => (super.noSuchMethod(
         Invocation.method(
           #getVersion,
           [],
         ),
-        returnValue: _i4.Future<String>.value(_i5.dummyValue<String>(
+        returnValue: _i5.Future<String>.value(_i6.dummyValue<String>(
           this,
           Invocation.method(
             #getVersion,
             [],
           ),
         )),
-      ) as _i4.Future<String>);
+      ) as _i5.Future<String>);
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, num>> send(_i7.Config? config) =>
+  _i5.Future<_i2.Either<_i7.Failure, num>> send(_i3.Config? config) =>
       (super.noSuchMethod(
         Invocation.method(
           #send,
           [config],
         ),
-        returnValue: _i4.Future<_i2.Either<_i6.Failure, num>>.value(
-            _FakeEither_0<_i6.Failure, num>(
+        returnValue: _i5.Future<_i2.Either<_i7.Failure, num>>.value(
+            _FakeEither_0<_i7.Failure, num>(
           this,
           Invocation.method(
             #send,
             [config],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, num>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, num>>);
 
   @override
-  _i4.Future<void> save(_i7.Config? config) => (super.noSuchMethod(
+  _i5.Future<void> save(_i3.Config? config) => (super.noSuchMethod(
         Invocation.method(
           #save,
           [config],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<_i3.Config> getConfig() => (super.noSuchMethod(
+        Invocation.method(
+          #getConfig,
+          [],
+        ),
+        returnValue: _i5.Future<_i3.Config>.value(_FakeConfig_1(
+          this,
+          Invocation.method(
+            #getConfig,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i3.Config>);
+
+  @override
+  _i5.Future<_i8.FlagUpdate> getFlagUpdate() => (super.noSuchMethod(
+        Invocation.method(
+          #getFlagUpdate,
+          [],
+        ),
+        returnValue: _i5.Future<_i8.FlagUpdate>.value(_i8.FlagUpdate.OUTDATED),
+      ) as _i5.Future<_i8.FlagUpdate>);
 }
 
 /// A class which mocks [ColabRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockColabRepository extends _i1.Mock implements _i8.ColabRepository {
+class MockColabRepository extends _i1.Mock implements _i9.ColabRepository {
   MockColabRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, bool>> addAllColab(
-          List<_i9.Colab>? list) =>
+  _i5.Future<_i2.Either<_i7.Failure, bool>> addAllColab(
+          List<_i10.Colab>? list) =>
       (super.noSuchMethod(
         Invocation.method(
           #addAllColab,
           [list],
         ),
-        returnValue: _i4.Future<_i2.Either<_i6.Failure, bool>>.value(
-            _FakeEither_0<_i6.Failure, bool>(
+        returnValue: _i5.Future<_i2.Either<_i7.Failure, bool>>.value(
+            _FakeEither_0<_i7.Failure, bool>(
           this,
           Invocation.method(
             #addAllColab,
             [list],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, bool>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, bool>>);
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, bool>> deleteAllColab() =>
+  _i5.Future<_i2.Either<_i7.Failure, bool>> deleteAllColab() =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteAllColab,
           [],
         ),
-        returnValue: _i4.Future<_i2.Either<_i6.Failure, bool>>.value(
-            _FakeEither_0<_i6.Failure, bool>(
+        returnValue: _i5.Future<_i2.Either<_i7.Failure, bool>>.value(
+            _FakeEither_0<_i7.Failure, bool>(
           this,
           Invocation.method(
             #deleteAllColab,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, bool>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, bool>>);
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, List<_i9.Colab>>> recoverAllColab(
+  _i5.Future<_i2.Either<_i7.Failure, List<_i10.Colab>>> recoverAllColab(
           String? token) =>
       (super.noSuchMethod(
         Invocation.method(
           #recoverAllColab,
           [token],
         ),
-        returnValue: _i4.Future<_i2.Either<_i6.Failure, List<_i9.Colab>>>.value(
-            _FakeEither_0<_i6.Failure, List<_i9.Colab>>(
+        returnValue:
+            _i5.Future<_i2.Either<_i7.Failure, List<_i10.Colab>>>.value(
+                _FakeEither_0<_i7.Failure, List<_i10.Colab>>(
           this,
           Invocation.method(
             #recoverAllColab,
             [token],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, List<_i9.Colab>>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, List<_i10.Colab>>>);
 }
 
 /// A class which mocks [EquipRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockEquipRepository extends _i1.Mock implements _i10.EquipRepository {
+class MockEquipRepository extends _i1.Mock implements _i11.EquipRepository {
   MockEquipRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, bool>> addAllEquip(
-          List<_i11.Equip>? list) =>
+  _i5.Future<_i2.Either<_i7.Failure, bool>> addAllEquip(
+          List<_i12.Equip>? list) =>
       (super.noSuchMethod(
         Invocation.method(
           #addAllEquip,
           [list],
         ),
-        returnValue: _i4.Future<_i2.Either<_i6.Failure, bool>>.value(
-            _FakeEither_0<_i6.Failure, bool>(
+        returnValue: _i5.Future<_i2.Either<_i7.Failure, bool>>.value(
+            _FakeEither_0<_i7.Failure, bool>(
           this,
           Invocation.method(
             #addAllEquip,
             [list],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, bool>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, bool>>);
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, bool>> deleteAllEquip() =>
+  _i5.Future<_i2.Either<_i7.Failure, bool>> deleteAllEquip() =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteAllEquip,
           [],
         ),
-        returnValue: _i4.Future<_i2.Either<_i6.Failure, bool>>.value(
-            _FakeEither_0<_i6.Failure, bool>(
+        returnValue: _i5.Future<_i2.Either<_i7.Failure, bool>>.value(
+            _FakeEither_0<_i7.Failure, bool>(
           this,
           Invocation.method(
             #deleteAllEquip,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, bool>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, bool>>);
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, List<_i11.Equip>>> recoverAllEquip(
+  _i5.Future<_i2.Either<_i7.Failure, List<_i12.Equip>>> recoverAllEquip(
           String? token) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -245,62 +281,62 @@ class MockEquipRepository extends _i1.Mock implements _i10.EquipRepository {
           [token],
         ),
         returnValue:
-            _i4.Future<_i2.Either<_i6.Failure, List<_i11.Equip>>>.value(
-                _FakeEither_0<_i6.Failure, List<_i11.Equip>>(
+            _i5.Future<_i2.Either<_i7.Failure, List<_i12.Equip>>>.value(
+                _FakeEither_0<_i7.Failure, List<_i12.Equip>>(
           this,
           Invocation.method(
             #recoverAllEquip,
             [token],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, List<_i11.Equip>>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, List<_i12.Equip>>>);
 }
 
 /// A class which mocks [LocalRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLocalRepository extends _i1.Mock implements _i12.LocalRepository {
+class MockLocalRepository extends _i1.Mock implements _i13.LocalRepository {
   MockLocalRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, bool>> addAllLocal(
-          List<_i13.Local>? list) =>
+  _i5.Future<_i2.Either<_i7.Failure, bool>> addAllLocal(
+          List<_i14.Local>? list) =>
       (super.noSuchMethod(
         Invocation.method(
           #addAllLocal,
           [list],
         ),
-        returnValue: _i4.Future<_i2.Either<_i6.Failure, bool>>.value(
-            _FakeEither_0<_i6.Failure, bool>(
+        returnValue: _i5.Future<_i2.Either<_i7.Failure, bool>>.value(
+            _FakeEither_0<_i7.Failure, bool>(
           this,
           Invocation.method(
             #addAllLocal,
             [list],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, bool>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, bool>>);
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, bool>> deleteAllLocal() =>
+  _i5.Future<_i2.Either<_i7.Failure, bool>> deleteAllLocal() =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteAllLocal,
           [],
         ),
-        returnValue: _i4.Future<_i2.Either<_i6.Failure, bool>>.value(
-            _FakeEither_0<_i6.Failure, bool>(
+        returnValue: _i5.Future<_i2.Either<_i7.Failure, bool>>.value(
+            _FakeEither_0<_i7.Failure, bool>(
           this,
           Invocation.method(
             #deleteAllLocal,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, bool>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, bool>>);
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, List<_i13.Local>>> recoverAllLocal(
+  _i5.Future<_i2.Either<_i7.Failure, List<_i14.Local>>> recoverAllLocal(
           String? token) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -308,63 +344,63 @@ class MockLocalRepository extends _i1.Mock implements _i12.LocalRepository {
           [token],
         ),
         returnValue:
-            _i4.Future<_i2.Either<_i6.Failure, List<_i13.Local>>>.value(
-                _FakeEither_0<_i6.Failure, List<_i13.Local>>(
+            _i5.Future<_i2.Either<_i7.Failure, List<_i14.Local>>>.value(
+                _FakeEither_0<_i7.Failure, List<_i14.Local>>(
           this,
           Invocation.method(
             #recoverAllLocal,
             [token],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, List<_i13.Local>>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, List<_i14.Local>>>);
 }
 
 /// A class which mocks [TerceiroRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTerceiroRepository extends _i1.Mock
-    implements _i14.TerceiroRepository {
+    implements _i15.TerceiroRepository {
   MockTerceiroRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, bool>> addAllTerceiro(
-          List<_i15.Terceiro>? list) =>
+  _i5.Future<_i2.Either<_i7.Failure, bool>> addAllTerceiro(
+          List<_i16.Terceiro>? list) =>
       (super.noSuchMethod(
         Invocation.method(
           #addAllTerceiro,
           [list],
         ),
-        returnValue: _i4.Future<_i2.Either<_i6.Failure, bool>>.value(
-            _FakeEither_0<_i6.Failure, bool>(
+        returnValue: _i5.Future<_i2.Either<_i7.Failure, bool>>.value(
+            _FakeEither_0<_i7.Failure, bool>(
           this,
           Invocation.method(
             #addAllTerceiro,
             [list],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, bool>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, bool>>);
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, bool>> deleteAllTerceiro() =>
+  _i5.Future<_i2.Either<_i7.Failure, bool>> deleteAllTerceiro() =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteAllTerceiro,
           [],
         ),
-        returnValue: _i4.Future<_i2.Either<_i6.Failure, bool>>.value(
-            _FakeEither_0<_i6.Failure, bool>(
+        returnValue: _i5.Future<_i2.Either<_i7.Failure, bool>>.value(
+            _FakeEither_0<_i7.Failure, bool>(
           this,
           Invocation.method(
             #deleteAllTerceiro,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, bool>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, bool>>);
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, List<_i15.Terceiro>>> recoverAllTerceiro(
+  _i5.Future<_i2.Either<_i7.Failure, List<_i16.Terceiro>>> recoverAllTerceiro(
           String? token) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -372,63 +408,63 @@ class MockTerceiroRepository extends _i1.Mock
           [token],
         ),
         returnValue:
-            _i4.Future<_i2.Either<_i6.Failure, List<_i15.Terceiro>>>.value(
-                _FakeEither_0<_i6.Failure, List<_i15.Terceiro>>(
+            _i5.Future<_i2.Either<_i7.Failure, List<_i16.Terceiro>>>.value(
+                _FakeEither_0<_i7.Failure, List<_i16.Terceiro>>(
           this,
           Invocation.method(
             #recoverAllTerceiro,
             [token],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, List<_i15.Terceiro>>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, List<_i16.Terceiro>>>);
 }
 
 /// A class which mocks [VisitanteRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockVisitanteRepository extends _i1.Mock
-    implements _i16.VisitanteRepository {
+    implements _i17.VisitanteRepository {
   MockVisitanteRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, bool>> addAllVisitante(
-          List<_i17.Visitante>? list) =>
+  _i5.Future<_i2.Either<_i7.Failure, bool>> addAllVisitante(
+          List<_i18.Visitante>? list) =>
       (super.noSuchMethod(
         Invocation.method(
           #addAllVisitante,
           [list],
         ),
-        returnValue: _i4.Future<_i2.Either<_i6.Failure, bool>>.value(
-            _FakeEither_0<_i6.Failure, bool>(
+        returnValue: _i5.Future<_i2.Either<_i7.Failure, bool>>.value(
+            _FakeEither_0<_i7.Failure, bool>(
           this,
           Invocation.method(
             #addAllVisitante,
             [list],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, bool>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, bool>>);
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, bool>> deleteAllVisitante() =>
+  _i5.Future<_i2.Either<_i7.Failure, bool>> deleteAllVisitante() =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteAllVisitante,
           [],
         ),
-        returnValue: _i4.Future<_i2.Either<_i6.Failure, bool>>.value(
-            _FakeEither_0<_i6.Failure, bool>(
+        returnValue: _i5.Future<_i2.Either<_i7.Failure, bool>>.value(
+            _FakeEither_0<_i7.Failure, bool>(
           this,
           Invocation.method(
             #deleteAllVisitante,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, bool>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, bool>>);
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, List<_i17.Visitante>>> recoverAllVisitante(
+  _i5.Future<_i2.Either<_i7.Failure, List<_i18.Visitante>>> recoverAllVisitante(
           String? token) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -436,13 +472,13 @@ class MockVisitanteRepository extends _i1.Mock
           [token],
         ),
         returnValue:
-            _i4.Future<_i2.Either<_i6.Failure, List<_i17.Visitante>>>.value(
-                _FakeEither_0<_i6.Failure, List<_i17.Visitante>>(
+            _i5.Future<_i2.Either<_i7.Failure, List<_i18.Visitante>>>.value(
+                _FakeEither_0<_i7.Failure, List<_i18.Visitante>>(
           this,
           Invocation.method(
             #recoverAllVisitante,
             [token],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i6.Failure, List<_i17.Visitante>>>);
+      ) as _i5.Future<_i2.Either<_i7.Failure, List<_i18.Visitante>>>);
 }

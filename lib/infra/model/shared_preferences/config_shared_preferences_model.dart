@@ -13,6 +13,7 @@ class ConfigSharedPreferencesModel with EquatableMixin {
   final num? matricVigia;
   final num? idLocal;
   final StatusSend? statusEnvio;
+  final StatusData? statusApont;
 
   ConfigSharedPreferencesModel({
     this.nroAparelhoConfig,
@@ -23,6 +24,7 @@ class ConfigSharedPreferencesModel with EquatableMixin {
     this.matricVigia,
     this.idLocal,
     this.statusEnvio,
+    this.statusApont,
   });
 
   factory ConfigSharedPreferencesModel.toConfigSharedPreferencesModel(
@@ -36,6 +38,7 @@ class ConfigSharedPreferencesModel with EquatableMixin {
       matricVigia: config.matricVigia,
       idLocal: config.idLocal,
       statusEnvio: config.statusEnvio,
+      statusApont: config.statusApont,
     );
   }
 
@@ -49,6 +52,7 @@ class ConfigSharedPreferencesModel with EquatableMixin {
       'matricVigia': matricVigia,
       'idLocal': idLocal,
       'statusEnvio': statusEnvio?.index,
+      'statusApont': statusApont?.index,
     };
   }
 
@@ -71,6 +75,9 @@ class ConfigSharedPreferencesModel with EquatableMixin {
       statusEnvio: map['statusEnvio'] != null
           ? StatusSend.values[map['statusEnvio'] as int]
           : null,
+      statusApont: map['statusApont'] != null
+          ? StatusData.values[map['statusApont'] as int]
+          : null,
     );
   }
 
@@ -90,5 +97,6 @@ class ConfigSharedPreferencesModel with EquatableMixin {
         matricVigia,
         idLocal,
         statusEnvio,
+        statusApont,
       ];
 }

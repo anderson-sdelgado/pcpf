@@ -1,16 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:pcp/domain/usecases/initial/check_password_config.dart';
 import 'package:pcp/presenter/initial/senha/cubit/senha_cubit.dart';
 import 'package:pcp/presenter/initial/senha/cubit/senha_states.dart';
 
-import 'senha_cubit_test.mocks.dart';
+import '../../../mock_usecases.mocks.dart';
 
-@GenerateMocks([
-  CheckPasswordConfig,
-])
 void main() {
   final checkPasswordConfig = MockCheckPasswordConfig();
   final senhaCubit = SenhaCubit(checkPasswordConfig);
@@ -31,7 +26,8 @@ void main() {
               SuccessSenhaStates(),
             ]);
 
-    blocTest<SenhaCubit, SenhaStates>('Senha foi diferente digitada emite Falha',
+    blocTest<SenhaCubit, SenhaStates>(
+        'Senha foi diferente digitada emite Falha',
         build: () => senhaCubit,
         act: (cubit) {
           when(checkPasswordConfig("12345"))
@@ -39,9 +35,7 @@ void main() {
           cubit.checkPassword("12345");
         },
         expect: () => [
-          FailSenhaStates(),
-        ]);
-
+              FailSenhaStates(),
+            ]);
   });
 }
-

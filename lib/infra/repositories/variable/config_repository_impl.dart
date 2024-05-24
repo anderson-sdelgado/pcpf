@@ -5,6 +5,7 @@ import 'package:pcp/domain/repositories/variable/config_repository.dart';
 import 'package:pcp/infra/datasource/shared_preferences/config_shared_preferences_datasource.dart';
 import 'package:pcp/infra/datasource/web_preferences/variable/config_web_service_datasource.dart';
 import 'package:pcp/infra/model/shared_preferences/config_shared_preferences_model.dart';
+import 'package:pcp/utils/enum.dart';
 
 import '../../model/web_service/variable/config_web_service_model.dart';
 
@@ -58,5 +59,19 @@ class ConfigRepositoryImpl implements ConfigRepository {
     return await configSharedPreferencesDatasource
         .getConfig()
         .then((value) => value.version!);
+  }
+
+  @override
+  Future<Config> getConfig() async {
+    return await configSharedPreferencesDatasource
+        .getConfig()
+        .then((value) => Config.fromSharedPreferencesModelToEntity(value));
+  }
+
+  @override
+  Future<FlagUpdate> getFlagUpdate() async {
+    return await configSharedPreferencesDatasource
+        .getConfig()
+        .then((value) => value.flagUpdate!);
   }
 }

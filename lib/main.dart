@@ -9,7 +9,9 @@ void main() async {
     FutureBuilder(
         future: getIt.allReady(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return const AppWidget();
+          return const AppWidget(
+            urlInitial: '/matricvigia',
+          );
         }),
   );
   // runApp(const AppWidget());

@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pcp/app_module.dart';
-import 'package:pcp/app_style.dart';
 import 'package:pcp/presenter/initial/config/cubit/config_cubit.dart';
-import 'package:pcp/presenter/initial/config/cubit/config_states.dart';
 import 'package:pcp/presenter/initial/config/view/config_form.dart';
-import 'package:pcp/utils/activity_extension.dart';
-import 'package:pcp/utils/constant.dart';
 
+// ignore: must_be_immutable
 class ConfigPage extends StatelessWidget {
-  ConfigPage({super.key});
-
-  AppTheme style = AppTheme();
+  const ConfigPage({super.key});
 
   @override
   Widget build(BuildContext context) {

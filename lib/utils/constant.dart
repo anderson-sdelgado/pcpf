@@ -6,6 +6,7 @@ const FONT_SIZE_ITEM_LIST = 22.0;
 const URL_MENU_INICIAL = '/';
 const URL_SENHA = '/senha';
 const URL_CONFIG = '/config';
+const URL_MATRIC_VIGIA = '/matricvigia';
 
 // TABELA SHARE PREFERENCE
 const BASE_SHARE_PREFERENCES_TABLE_CONFIG = "config";

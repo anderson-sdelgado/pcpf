@@ -45,18 +45,15 @@ class _ConfigFormState extends State<ConfigForm>
         child: Column(
           children: [
             BlocListener<ConfigCubit, ConfigStates>(
-              listener: (BuildContext context, ConfigStates state) {
+              listener: (BuildContext context, ConfigStates state) async {
                 if (state is FinishConfigStates) {
-                  showDialogDefaultFunction(
-                      context,
-                      "Finalização de Configurações Iniciais",
-                      ReadContext(context)
-                          .read<ConfigCubit>()
-                          .updateAllDatabase());
-                }
-                if (state is FinishConfigStates) {
-                  showDialogDefault(
+                  await showDialogDefault(
                       context, "Finalização de Configurações Iniciais");
+                  ReadContext(context).read<ConfigCubit>().updateAllDatabase();
+                } else if (state is FinishUpdateTableStates) {
+                  await showDialogDefault(
+                      context, "Finalização de Importação dos dados");
+                  if (context.mounted) context.go(URL_MENU_INICIAL);
                 }
               },
               child: Column(
@@ -171,48 +168,51 @@ class _ConfigFormState extends State<ConfigForm>
               builder: (context, state) {
                 const int sizeInitialConfig = 3;
                 const int sizeUpdateDatabase = 15;
-                if (state is InitialConfigStates) {
-                  return const Column();
-                } else if (state is SendConfigStates) {
-                  return _progress(
-                      porc(1, sizeInitialConfig), "Enviar Dados de Token");
-                } else if (state is SaveConfigStates) {
-                  return _progress(porc(2, sizeInitialConfig),
-                      "Salvar Dados de Configurações");
-                } else if (state is FinishConfigStates) {
-                  return _progress(porc(3, sizeInitialConfig),
-                      "Finalizando Configurações Inicial");
-                } else if (state is DeleteTableStates) {
-                  return _progress(porc((state.pos + 1), sizeUpdateDatabase),
-                      "Excluindo dados da tabela '${state.table}'");
-                } else if (state is RecoverDataTableStates) {
-                  return _progress(porc((state.pos + 2), sizeUpdateDatabase),
-                      "Importando dados da tabela '${state.table}' do web service");
-                } else if (state is AddDataTableStates) {
-                  return _progress(porc((state.pos + 3), sizeUpdateDatabase),
-                      "Salvandos dados da tabela '${state.table}' do web service");
-                } else if (state is ErrorConfigStates) {
-                  final ErrorConfigStates error = state;
-                  final failure = error.failure;
-                  if (failure is ErrorRepository) {
-                    final ErrorRepository integrationData = failure;
+                switch (state) {
+                  case InitialConfigStates():
+                    return const Column();
+                  case SendConfigStates():
                     return _progress(
-                        1, "Error Repository => ${integrationData.message!}");
-                  } else if (failure is ErrorWebServiceDatasource) {
-                    final ErrorWebServiceDatasource errorWebServiceDatasource =
-                        failure;
-                    return _progress(1,
-                        "Error Web Service Datasource => ${errorWebServiceDatasource.message!}");
-                  } else if (failure is ErrorFloorDatasource) {
-                    final ErrorFloorDatasource errorFloorDatasource = failure;
-                    return _progress(1,
-                        "Error Floor Datasource => ${errorFloorDatasource.message!}");
-                  } else {
+                        porc(1, sizeInitialConfig), "Enviar Dados de Token");
+                  case SaveConfigStates():
+                    return _progress(porc(2, sizeInitialConfig),
+                        "Salvar Dados de Configurações");
+                  case FinishConfigStates():
+                    return _progress(porc(3, sizeInitialConfig),
+                        "Finalizando Configurações Inicial");
+                  case DeleteTableStates():
+                    return _progress(porc((state.pos + 1), sizeUpdateDatabase),
+                        "Excluindo dados da tabela '${state.table}'");
+                  case RecoverDataTableStates():
+                    return _progress(porc((state.pos + 2), sizeUpdateDatabase),
+                        "Importando dados da tabela '${state.table}' do web service");
+                  case AddDataTableStates():
+                    return _progress(porc((state.pos + 3), sizeUpdateDatabase),
+                        "Salvandos dados da tabela '${state.table}' do web service");
+                  case ErrorConfigStates():
+                    final ErrorConfigStates error = state;
+                    final failure = error.failure;
+                    switch (failure) {
+                      case ErrorRepository():
+                        final ErrorRepository integrationData = failure;
+                        return _progress(1,
+                            "Error Repository => ${integrationData.message!}");
+                      case ErrorWebServiceDatasource():
+                        final ErrorWebServiceDatasource
+                            errorWebServiceDatasource = failure;
+                        return _progress(1,
+                            "Error Web Service Datasource => ${errorWebServiceDatasource.message!}");
+                      case ErrorFloorDatasource():
+                        final ErrorFloorDatasource errorFloorDatasource =
+                            failure;
+                        return _progress(1,
+                            "Error Floor Datasource => ${errorFloorDatasource.message!}");
+                      default:
+                        return _progress(1, "Falha inexistente. Contate o TI");
+                    }
+                  default:
                     return _progress(
-                        1, "Falha inexistente tipo 1. Contate o TI");
-                  }
-                } else {
-                  return _progress(1, "Falha inexistente tipo 2. Contate o TI");
+                        porc(1, 1), "Importação realizada com sucesso");
                 }
               },
             ),
@@ -246,4 +246,5 @@ class _ConfigFormState extends State<ConfigForm>
       ),
     );
   }
+
 }

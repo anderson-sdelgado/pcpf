@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pcp/domain/entities/stable/colab.dart';
 import 'package:pcp/domain/entities/stable/equip.dart';
@@ -22,6 +21,7 @@ import 'package:pcp/domain/usecases/database/recover_all_terceiro.dart';
 import 'package:pcp/domain/usecases/database/recover_all_visitante.dart';
 import 'package:pcp/domain/usecases/initial/save_initial_config.dart';
 import 'package:pcp/domain/usecases/initial/send_initial_config.dart';
+import 'package:pcp/domain/usecases/initial/set_config_all_database_update.dart';
 import 'package:pcp/presenter/initial/config/cubit/config_states.dart';
 import 'package:pcp/utils/constant.dart';
 
@@ -43,6 +43,7 @@ class ConfigCubit extends Cubit<ConfigStates> {
   final DeleteAllVisitante deleteAllVisitante;
   final RecoverAllVisitante recoverAllVisitante;
   final AddAllVisitante addAllVisitante;
+  final SetConfigAllDatabaseUpdate setConfigAllDatabaseUpdate;
 
   ConfigCubit(
     this.sendInitialConfig,
@@ -62,6 +63,7 @@ class ConfigCubit extends Cubit<ConfigStates> {
     this.deleteAllVisitante,
     this.recoverAllVisitante,
     this.addAllVisitante,
+    this.setConfigAllDatabaseUpdate,
   ) : super(InitialConfigStates());
 
   Future<void> saveConfig({
@@ -87,16 +89,17 @@ class ConfigCubit extends Cubit<ConfigStates> {
   }
 
   Future<void> updateAllDatabase() async {
-    if(!await _updateAllColab()) return;
-    if(!await _updateAllEquip()) return;
-    if(!await _updateAllLocal()) return;
-    if(!await _updateAllTerceiro()) return;
-    if(!await _updateAllVisitante()) return;
+    if (!await _updateAllColab(1)) return;
+    if (!await _updateAllEquip(2)) return;
+    if (!await _updateAllLocal(3)) return;
+    if (!await _updateAllTerceiro(4)) return;
+    if (!await _updateAllVisitante(5)) return;
+    await setConfigAllDatabaseUpdate();
     emit(FinishUpdateTableStates());
   }
 
-  Future<bool> _updateAllColab() async {
-    emit(DeleteTableStates(TABLE_FLOOR_COLAB, 1));
+  Future<bool> _updateAllColab(int pos) async {
+    emit(DeleteTableStates(TABLE_FLOOR_COLAB, pos));
     final deleteAll = await deleteAllColab();
     if (deleteAll.isLeft()) {
       deleteAll.fold((l) {
@@ -104,7 +107,7 @@ class ConfigCubit extends Cubit<ConfigStates> {
       }, (r) => null);
       return false;
     }
-    emit(RecoverDataTableStates(TABLE_FLOOR_COLAB, 2));
+    emit(RecoverDataTableStates(TABLE_FLOOR_COLAB, pos));
     final recoverAll = await recoverAllColab();
     List<Colab> list = [];
     recoverAll.fold((l) {
@@ -113,7 +116,7 @@ class ConfigCubit extends Cubit<ConfigStates> {
       list = r;
     });
     if (recoverAll.isLeft()) return false;
-    emit(AddDataTableStates(TABLE_FLOOR_COLAB, 3));
+    emit(AddDataTableStates(TABLE_FLOOR_COLAB, pos));
     final addAll = await addAllColab(list);
     if (addAll.isLeft()) {
       addAll.fold((l) {
@@ -124,8 +127,8 @@ class ConfigCubit extends Cubit<ConfigStates> {
     return true;
   }
 
-  Future<bool> _updateAllEquip() async {
-    emit(DeleteTableStates(TABLE_FLOOR_EQUIP, 1));
+  Future<bool> _updateAllEquip(int pos) async {
+    emit(DeleteTableStates(TABLE_FLOOR_EQUIP, pos));
     final deleteAll = await deleteAllEquip();
     if (deleteAll.isLeft()) {
       deleteAll.fold((l) {
@@ -133,7 +136,7 @@ class ConfigCubit extends Cubit<ConfigStates> {
       }, (r) => null);
       return false;
     }
-    emit(RecoverDataTableStates(TABLE_FLOOR_EQUIP, 2));
+    emit(RecoverDataTableStates(TABLE_FLOOR_EQUIP, pos));
     final recoverAll = await recoverAllEquip();
     List<Equip> list = [];
     recoverAll.fold((l) {
@@ -142,7 +145,7 @@ class ConfigCubit extends Cubit<ConfigStates> {
       list = r;
     });
     if (recoverAll.isLeft()) return false;
-    emit(AddDataTableStates(TABLE_FLOOR_EQUIP, 3));
+    emit(AddDataTableStates(TABLE_FLOOR_EQUIP, pos));
     final addAll = await addAllEquip(list);
     if (addAll.isLeft()) {
       addAll.fold((l) {
@@ -153,8 +156,8 @@ class ConfigCubit extends Cubit<ConfigStates> {
     return true;
   }
 
-  Future<bool> _updateAllLocal() async {
-    emit(DeleteTableStates(TABLE_FLOOR_LOCAL, 1));
+  Future<bool> _updateAllLocal(int pos) async {
+    emit(DeleteTableStates(TABLE_FLOOR_LOCAL, pos));
     final deleteAll = await deleteAllLocal();
     if (deleteAll.isLeft()) {
       deleteAll.fold((l) {
@@ -162,7 +165,7 @@ class ConfigCubit extends Cubit<ConfigStates> {
       }, (r) => null);
       return false;
     }
-    emit(RecoverDataTableStates(TABLE_FLOOR_LOCAL, 2));
+    emit(RecoverDataTableStates(TABLE_FLOOR_LOCAL, pos));
     final recoverAll = await recoverAllLocal();
     List<Local> list = [];
     recoverAll.fold((l) {
@@ -171,7 +174,7 @@ class ConfigCubit extends Cubit<ConfigStates> {
       list = r;
     });
     if (recoverAll.isLeft()) return false;
-    emit(AddDataTableStates(TABLE_FLOOR_LOCAL, 3));
+    emit(AddDataTableStates(TABLE_FLOOR_LOCAL, pos));
     final addAll = await addAllLocal(list);
     if (addAll.isLeft()) {
       addAll.fold((l) {
@@ -182,8 +185,8 @@ class ConfigCubit extends Cubit<ConfigStates> {
     return true;
   }
 
-  Future<bool> _updateAllTerceiro() async {
-    emit(DeleteTableStates(TABLE_FLOOR_TERCEIRO, 1));
+  Future<bool> _updateAllTerceiro(int pos) async {
+    emit(DeleteTableStates(TABLE_FLOOR_TERCEIRO, pos));
     final deleteAll = await deleteAllTerceiro();
     if (deleteAll.isLeft()) {
       deleteAll.fold((l) {
@@ -191,7 +194,7 @@ class ConfigCubit extends Cubit<ConfigStates> {
       }, (r) => null);
       return false;
     }
-    emit(RecoverDataTableStates(TABLE_FLOOR_TERCEIRO, 2));
+    emit(RecoverDataTableStates(TABLE_FLOOR_TERCEIRO, pos));
     final recoverAll = await recoverAllTerceiro();
     List<Terceiro> list = [];
     recoverAll.fold((l) {
@@ -200,7 +203,7 @@ class ConfigCubit extends Cubit<ConfigStates> {
       list = r;
     });
     if (recoverAll.isLeft()) return false;
-    emit(AddDataTableStates(TABLE_FLOOR_TERCEIRO, 3));
+    emit(AddDataTableStates(TABLE_FLOOR_TERCEIRO, pos));
     final addAll = await addAllTerceiro(list);
     if (addAll.isLeft()) {
       addAll.fold((l) {
@@ -211,8 +214,8 @@ class ConfigCubit extends Cubit<ConfigStates> {
     return true;
   }
 
-  Future<bool> _updateAllVisitante() async {
-    emit(DeleteTableStates(TABLE_FLOOR_VISITANTE, 1));
+  Future<bool> _updateAllVisitante(int pos) async {
+    emit(DeleteTableStates(TABLE_FLOOR_VISITANTE, pos));
     final deleteAll = await deleteAllVisitante();
     if (deleteAll.isLeft()) {
       deleteAll.fold((l) {
@@ -220,7 +223,7 @@ class ConfigCubit extends Cubit<ConfigStates> {
       }, (r) => null);
       return false;
     }
-    emit(RecoverDataTableStates(TABLE_FLOOR_VISITANTE, 2));
+    emit(RecoverDataTableStates(TABLE_FLOOR_VISITANTE, pos));
     final recoverAll = await recoverAllVisitante();
     List<Visitante> list = [];
     recoverAll.fold((l) {
@@ -229,7 +232,7 @@ class ConfigCubit extends Cubit<ConfigStates> {
       list = r;
     });
     if (recoverAll.isLeft()) return false;
-    emit(AddDataTableStates(TABLE_FLOOR_VISITANTE, 3));
+    emit(AddDataTableStates(TABLE_FLOOR_VISITANTE, pos));
     final addAll = await addAllVisitante(list);
     if (addAll.isLeft()) {
       addAll.fold((l) {

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pcp/domain/usecases/initial/check_password_config.dart';
 import 'package:pcp/presenter/initial/senha/cubit/senha_states.dart';
@@ -9,9 +7,8 @@ class SenhaCubit extends Cubit<SenhaStates> {
   SenhaCubit(this.checkPasswordConfig) : super(InitialSenhaStates());
 
   Future<void> checkPassword(String password) async {
-    var ret = await checkPasswordConfig(password);
-    log("Chegou aki 1");
-    if(ret){
+    final result = await checkPasswordConfig(password);
+    if(result){
       emit(SuccessSenhaStates());
     } else {
       emit(FailSenhaStates());

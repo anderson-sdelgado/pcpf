@@ -9,7 +9,7 @@ class ColabFloorModel extends Equatable {
   final int matricColab;
   final String nomeColab;
 
-  ColabFloorModel({
+  const ColabFloorModel({
     required this.matricColab,
     required this.nomeColab,
   });

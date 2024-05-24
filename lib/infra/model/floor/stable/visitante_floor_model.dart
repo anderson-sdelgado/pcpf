@@ -12,7 +12,7 @@ class VisitanteFloorModel extends Equatable {
   final String nomeVisitante;
   final String empresaVisitante;
 
-  VisitanteFloorModel({
+  const VisitanteFloorModel({
     required this.idVisitante,
     required this.cpfVisitante,
     required this.nomeVisitante,

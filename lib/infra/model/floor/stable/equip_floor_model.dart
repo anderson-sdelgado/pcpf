@@ -9,7 +9,7 @@ class EquipFloorModel extends Equatable {
   final int idEquip;
   final int nroEquip;
 
-  EquipFloorModel({
+  const EquipFloorModel({
     required this.idEquip,
     required this.nroEquip,
   });

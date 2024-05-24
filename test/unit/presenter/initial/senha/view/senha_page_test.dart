@@ -5,7 +5,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:pcp/app_module.dart';
 import 'package:pcp/app_widget.dart';
 import 'package:pcp/presenter/initial/config/view/config_page.dart';
-import 'package:pcp/presenter/initial/menu_inicial/menu_inicial_page.dart';
+import 'package:pcp/presenter/initial/menu_inicial/view/menu_inicial_page.dart';
 import 'package:pcp/presenter/initial/senha/cubit/senha_cubit.dart';
 import 'package:pcp/presenter/initial/senha/cubit/senha_states.dart';
 import 'package:pcp/presenter/initial/senha/view/senha_form.dart';
@@ -204,6 +204,7 @@ main() {
 
       verify(() => senhaCubit.checkPassword("12345")).called(1);
       expect(senhaCubit.state, FailSenhaStates());
+
     });
 
     testWidgets("Verificar retorno no clique do button Cancelar",

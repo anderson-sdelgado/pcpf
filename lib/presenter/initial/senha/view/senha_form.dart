@@ -6,7 +6,6 @@ import 'package:pcp/presenter/initial/senha/cubit/senha_cubit.dart';
 import 'package:pcp/presenter/initial/senha/cubit/senha_states.dart';
 import 'package:pcp/utils/activity_extension.dart';
 import 'package:pcp/utils/constant.dart';
-import 'dart:developer';
 
 const KEY_SENHA_TEXT_FIELD = 'key_senha_text_field';
 const KEY_OK_SENHA_BUTTON = 'key_ok_senha_button';
@@ -102,7 +101,6 @@ class _SenhaFormState extends State<SenhaForm> {
         if (state is SuccessSenhaStates) {
           context.go(URL_CONFIG);
         } else if (state is FailSenhaStates) {
-          log("Chegou aki");
           showDialogDefault(context, "SENHA INVÁLIDA!");
         }
       },

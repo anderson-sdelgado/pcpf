@@ -12,7 +12,7 @@ class TerceiroFloorModel extends Equatable {
   final String nomeTerceiro;
   final String empresaTerceiro;
 
-  TerceiroFloorModel({
+  const TerceiroFloorModel({
     required this.idTerceiro,
     required this.idBDTerceiro,
     required this.cpfTerceiro,

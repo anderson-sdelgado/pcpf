@@ -24,7 +24,6 @@ class Visitante with EquatableMixin {
     );
   }
 
-
   factory Visitante.fromWebServiceModelToEntity(VisitanteWebServiceModelInput visitanteWebServiceModelInput) {
     return Visitante(
       idVisitante: visitanteWebServiceModelInput.idVisitante,

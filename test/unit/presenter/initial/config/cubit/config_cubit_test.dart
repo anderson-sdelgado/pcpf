@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:pcp/domain/entities/stable/colab.dart';
 import 'package:pcp/domain/entities/stable/equip.dart';
@@ -9,27 +8,10 @@ import 'package:pcp/domain/entities/stable/local.dart';
 import 'package:pcp/domain/entities/stable/terceiro.dart';
 import 'package:pcp/domain/entities/stable/visitante.dart';
 import 'package:pcp/domain/errors/errors.dart';
-import 'package:pcp/domain/usecases/database/add_all_colab.dart';
-import 'package:pcp/domain/usecases/database/add_all_equip.dart';
-import 'package:pcp/domain/usecases/database/add_all_local.dart';
-import 'package:pcp/domain/usecases/database/add_all_terceiro.dart';
-import 'package:pcp/domain/usecases/database/add_all_visitante.dart';
-import 'package:pcp/domain/usecases/database/delete_all_colab.dart';
-import 'package:pcp/domain/usecases/database/delete_all_equip.dart';
-import 'package:pcp/domain/usecases/database/delete_all_local.dart';
-import 'package:pcp/domain/usecases/database/delete_all_terceiro.dart';
-import 'package:pcp/domain/usecases/database/delete_all_visitante.dart';
-import 'package:pcp/domain/usecases/database/recover_all_colab.dart';
-import 'package:pcp/domain/usecases/database/recover_all_equip.dart';
-import 'package:pcp/domain/usecases/database/recover_all_local.dart';
-import 'package:pcp/domain/usecases/database/recover_all_terceiro.dart';
-import 'package:pcp/domain/usecases/database/recover_all_visitante.dart';
-import 'package:pcp/domain/usecases/initial/save_initial_config.dart';
-import 'package:pcp/domain/usecases/initial/send_initial_config.dart';
 import 'package:pcp/presenter/initial/config/cubit/config_cubit.dart';
 import 'package:pcp/presenter/initial/config/cubit/config_states.dart';
 
-import 'config_cubit_test.mocks.dart';
+import '../../../mock_usecases.mocks.dart';
 
 final sendInitialConfig = MockSendInitialConfig();
 final saveInitialConfig = MockSaveInitialConfig();
@@ -48,6 +30,7 @@ final addAllTerceiro = MockAddAllTerceiro();
 final deleteAllVisitante = MockDeleteAllVisitante();
 final recoverAllVisitante = MockRecoverAllVisitante();
 final addAllVisitante = MockAddAllVisitante();
+final setConfigAllDatabaseUpdate = MockSetConfigAllDatabaseUpdate();
 
 final listColab = [
   Colab(
@@ -89,25 +72,7 @@ final listVisitante = [
   ),
 ];
 
-@GenerateMocks([
-  SendInitialConfig,
-  SaveInitialConfig,
-  DeleteAllColab,
-  RecoverAllColab,
-  AddAllColab,
-  DeleteAllEquip,
-  RecoverAllEquip,
-  AddAllEquip,
-  DeleteAllLocal,
-  RecoverAllLocal,
-  AddAllLocal,
-  DeleteAllTerceiro,
-  RecoverAllTerceiro,
-  AddAllTerceiro,
-  DeleteAllVisitante,
-  RecoverAllVisitante,
-  AddAllVisitante,
-])
+
 main() {
   final configCubit = ConfigCubit(
     sendInitialConfig,
@@ -127,6 +92,7 @@ main() {
     deleteAllVisitante,
     recoverAllVisitante,
     addAllVisitante,
+    setConfigAllDatabaseUpdate,
   );
 
   group("Test ConfigCubit", () {
@@ -467,7 +433,8 @@ main() {
         whenLocal();
         whenTerceiro();
         when(deleteAllVisitante()).thenAnswer((_) async => const Right(true));
-        when(recoverAllVisitante()).thenAnswer((_) async => Right(listVisitante));
+        when(recoverAllVisitante())
+            .thenAnswer((_) async => Right(listVisitante));
         when(addAllVisitante(listVisitante))
             .thenAnswer((_) async => Left(ErrorRepository("")));
         cubit.updateAllDatabase();
@@ -482,7 +449,6 @@ main() {
         isA<AddDataTableStates>(),
         isA<ErrorConfigStates>(),
       ],
-
     );
 
     blocTest<ConfigCubit, ConfigStates>(
@@ -494,7 +460,8 @@ main() {
         whenLocal();
         whenTerceiro();
         when(deleteAllVisitante()).thenAnswer((_) async => const Right(true));
-        when(recoverAllVisitante()).thenAnswer((_) async => Right(listVisitante));
+        when(recoverAllVisitante())
+            .thenAnswer((_) async => Right(listVisitante));
         when(addAllVisitante(listVisitante))
             .thenAnswer((_) async => Left(ErrorRepository("")));
         cubit.updateAllDatabase();
@@ -529,8 +496,6 @@ main() {
         ...statesTable(),
         ...statesTable(),
         isA<FinishUpdateTableStates>(),
-
-
       ],
     );
   });
@@ -563,7 +528,8 @@ whenTerceiro() {
 whenVisitante() {
   when(deleteAllVisitante()).thenAnswer((_) async => const Right(true));
   when(recoverAllVisitante()).thenAnswer((_) async => Right(listVisitante));
-  when(addAllVisitante(listVisitante)).thenAnswer((_) async => const Right(true));
+  when(addAllVisitante(listVisitante))
+      .thenAnswer((_) async => const Right(true));
 }
 
 List statesTable() {

@@ -99,7 +99,7 @@ class _$AppDatabase extends AppDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `local` (`idLocal` INTEGER NOT NULL, `descrLocal` TEXT NOT NULL, PRIMARY KEY (`idLocal`))');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `terceiro` (`idTerceiro` INTEGER NOT NULL, `idBDTerceiro` INTEGER NOT NULL, `cpfTerceiro` TEXT NOT NULL, `nomeTerceiro` TEXT NOT NULL, `empresaTerceiro` TEXT NOT NULL, PRIMARY KEY (`idTerceiro`))');
+            'CREATE TABLE IF NOT EXISTS `terceiro` (`idTerceiro` INTEGER PRIMARY KEY AUTOINCREMENT, `idBDTerceiro` INTEGER NOT NULL, `cpfTerceiro` TEXT NOT NULL, `nomeTerceiro` TEXT NOT NULL, `empresaTerceiro` TEXT NOT NULL)');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `visitante` (`idVisitante` INTEGER NOT NULL, `cpfVisitante` TEXT NOT NULL, `nomeVisitante` TEXT NOT NULL, `empresaVisitante` TEXT NOT NULL, PRIMARY KEY (`idVisitante`))');
 

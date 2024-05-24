@@ -1,16 +1,14 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pcp/app_module.dart';
 import 'package:pcp/app_widget.dart';
-import 'package:pcp/domain/errors/errors.dart';
 import 'package:pcp/presenter/initial/config/cubit/config_cubit.dart';
 import 'package:pcp/presenter/initial/config/view/config_form.dart';
 import 'package:pcp/presenter/initial/config/view/config_page.dart';
 import 'package:pcp/presenter/initial/config/cubit/config_states.dart';
-import 'package:pcp/presenter/initial/menu_inicial/menu_inicial_page.dart';
+import 'package:pcp/presenter/initial/menu_inicial/view/menu_inicial_page.dart';
 
 class MockConfigCubit extends MockCubit<ConfigStates> implements ConfigCubit {}
 
@@ -187,8 +185,6 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text("Enviar Dados de Token"), findsOneWidget);
-
     });
-
   });
 }

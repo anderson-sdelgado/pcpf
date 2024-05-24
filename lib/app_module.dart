@@ -22,8 +22,10 @@ import 'package:pcp/domain/usecases/database/recover_all_local.dart';
 import 'package:pcp/domain/usecases/database/recover_all_terceiro.dart';
 import 'package:pcp/domain/usecases/database/recover_all_visitante.dart';
 import 'package:pcp/domain/usecases/initial/check_password_config.dart';
+import 'package:pcp/domain/usecases/initial/check_status_update_database.dart';
 import 'package:pcp/domain/usecases/initial/save_initial_config.dart';
 import 'package:pcp/domain/usecases/initial/send_initial_config.dart';
+import 'package:pcp/domain/usecases/initial/set_config_all_database_update.dart';
 import 'package:pcp/external/floor/app_database.dart';
 import 'package:pcp/external/floor/stable/colab_floor_datasource_impl.dart';
 import 'package:pcp/external/floor/stable/equip_floor_datasource_impl.dart';
@@ -55,6 +57,8 @@ import 'package:pcp/infra/repositories/stable/terceiro_repository_impl.dart';
 import 'package:pcp/infra/repositories/stable/visitante_repository_impl.dart';
 import 'package:pcp/infra/repositories/variable/config_repository_impl.dart';
 import 'package:pcp/presenter/initial/config/cubit/config_cubit.dart';
+import 'package:pcp/presenter/initial/matric_vigia/cubit/matric_vigia_cubit.dart';
+import 'package:pcp/presenter/initial/menu_inicial/cubit/menu_inicial_cubit.dart';
 import 'package:pcp/presenter/initial/senha/cubit/senha_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -66,9 +70,10 @@ final getIt = GetIt.instance;
 void setup({bool test = false}) {
   // Persistence //
   getIt.registerSingleton<Dio>(Dio());
+
   getIt.registerFactory(() => LocalStorage());
 
-  if(test){
+  if (test) {
     getIt.registerSingletonAsync<AppDatabase>(() async => $FloorAppDatabase
         .inMemoryDatabaseBuilder()
         .addCallback(callback)
@@ -153,21 +158,6 @@ void setup({bool test = false}) {
   // Repository //
 
   //// Stable ////
-  //
-  // getIt.registerFactory<ColabRepository>(
-  //     () => ColabRepositoryImpl(getIt(), getIt()));
-  //
-  // getIt.registerFactory<EquipRepository>(
-  //     () => EquipRepositoryImpl(getIt(), getIt()));
-  //
-  // getIt.registerFactory<LocalRepository>(
-  //     () => LocalRepositoryImpl(getIt(), getIt()));
-  //
-  // getIt.registerFactory<TerceiroRepository>(
-  //     () => TerceiroRepositoryImpl(getIt(), getIt()));
-  //
-  // getIt.registerFactory<VisitanteRepository>(
-  //     () => VisitanteRepositoryImpl(getIt(), getIt()));
 
   getIt.registerSingletonWithDependencies<ColabRepository>(
       () => ColabRepositoryImpl(getIt(), getIt()),
@@ -252,31 +242,31 @@ void setup({bool test = false}) {
       dependsOn: [AppDatabase]);
 
   getIt.registerSingletonWithDependencies<RecoverAllEquip>(
-          () => RecoverAllEquipImpl(
-        getIt(),
-        getIt(),
-      ),
+      () => RecoverAllEquipImpl(
+            getIt(),
+            getIt(),
+          ),
       dependsOn: [AppDatabase]);
 
   getIt.registerSingletonWithDependencies<RecoverAllLocal>(
-          () => RecoverAllLocalImpl(
-        getIt(),
-        getIt(),
-      ),
+      () => RecoverAllLocalImpl(
+            getIt(),
+            getIt(),
+          ),
       dependsOn: [AppDatabase]);
 
   getIt.registerSingletonWithDependencies<RecoverAllTerceiro>(
-          () => RecoverAllTerceiroImpl(
-        getIt(),
-        getIt(),
-      ),
+      () => RecoverAllTerceiroImpl(
+            getIt(),
+            getIt(),
+          ),
       dependsOn: [AppDatabase]);
 
   getIt.registerSingletonWithDependencies<RecoverAllVisitante>(
-          () => RecoverAllVisitanteImpl(
-        getIt(),
-        getIt(),
-      ),
+      () => RecoverAllVisitanteImpl(
+            getIt(),
+            getIt(),
+          ),
       dependsOn: [AppDatabase]);
 
   //// ------------ ////
@@ -285,10 +275,18 @@ void setup({bool test = false}) {
 
   getIt.registerFactory<CheckPasswordConfig>(
       () => CheckPasswordConfigImpl(getIt()));
+
+  getIt.registerFactory<CheckStatusUpdateDatabase>(
+          () => CheckStatusUpdateDatabaseImpl(getIt()));
+
   getIt
       .registerFactory<SendInitialConfig>(() => SendInitialConfigImpl(getIt()));
+
   getIt
       .registerFactory<SaveInitialConfig>(() => SaveInitialConfigImpl(getIt()));
+
+  getIt.registerFactory<SetConfigAllDatabaseUpdate>(
+      () => SetConfigAllDatabaseUpdateImpl(getIt()));
 
   //// ------------ ////
 
@@ -296,6 +294,7 @@ void setup({bool test = false}) {
 
   // Cubit //
 
+  getIt.registerFactory(() => MenuInicialCubit(getIt()));
   getIt.registerFactory(() => SenhaCubit(getIt()));
   getIt.registerFactory(() => ConfigCubit(
         getIt(),
@@ -315,12 +314,25 @@ void setup({bool test = false}) {
         getIt(),
         getIt(),
         getIt(),
+        getIt(),
       ));
-
+  getIt.registerFactory(() => MatricVigiaCubit());
   // ------------ //
 }
 
 class LocalStorage {
+  save(String key, String value) async {
+    final shared = await SharedPreferences.getInstance();
+    shared.setString(key, value);
+  }
+
+  Future<String> get(String key) async {
+    final shared = await SharedPreferences.getInstance();
+    return shared.getString(key) ?? '';
+  }
+}
+
+class LocalStorageTest {
   save(String key, String value) async {
     final shared = await SharedPreferences.getInstance();
     shared.setString(key, value);

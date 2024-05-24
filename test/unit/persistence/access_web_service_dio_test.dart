@@ -16,8 +16,6 @@ void main() async {
           headers: headers,
         ),
       );
-      final data = response.data;
-      print(data);
       expect(response.statusCode, 200);
     });
 
@@ -29,8 +27,6 @@ void main() async {
           headers: headers,
         ),
       );
-      final data = response.data;
-      print(data);
       expect(response.statusCode, 200);
     });
 
@@ -42,8 +38,6 @@ void main() async {
           headers: headers,
         ),
       );
-      final data = response.data;
-      print(data);
       expect(response.statusCode, 200);
     });
 
@@ -55,8 +49,6 @@ void main() async {
           headers: headers,
         ),
       );
-      final data = response.data;
-      print(data);
       expect(response.statusCode, 200);
     });
 
@@ -68,8 +60,6 @@ void main() async {
           headers: headers,
         ),
       );
-      final data = response.data;
-      print(data);
       expect(response.statusCode, 200);
     });
 
@@ -81,8 +71,6 @@ void main() async {
           headers: headers,
         ),
       );
-      final data = response.data;
-      print(data);
       expect(response.statusCode, 200);
     });
   });

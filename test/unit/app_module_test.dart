@@ -1,14 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:pcp/app_module.dart';
 import 'package:pcp/domain/repositories/stable/colab_repository.dart';
-import 'package:pcp/domain/repositories/variable/config_repository.dart';
 import 'package:pcp/domain/usecases/database/add_all_colab.dart';
-import 'package:pcp/domain/usecases/initial/check_password_config.dart';
-import 'package:pcp/domain/usecases/initial/save_initial_config.dart';
-import 'package:pcp/domain/usecases/initial/send_initial_config.dart';
 import 'package:pcp/external/floor/app_database.dart';
 import 'package:pcp/external/floor/stable/colab_floor_datasource_impl.dart';
 import 'package:pcp/external/floor/stable/equip_floor_datasource_impl.dart';
@@ -21,7 +16,6 @@ import 'package:pcp/external/web_service/stable/equip_web_service_datasource_imp
 import 'package:pcp/external/web_service/stable/local_web_service_datasource_impl.dart';
 import 'package:pcp/external/web_service/stable/terceiro_web_service_datasource_impl.dart';
 import 'package:pcp/external/web_service/stable/visitante_web_service_datasource_impl.dart';
-import 'package:pcp/external/web_service/variable/config_web_service_datasource_impl.dart';
 import 'package:pcp/infra/datasource/floor/stable/colab_floor_datasource.dart';
 import 'package:pcp/infra/datasource/floor/stable/equip_floor_datasource.dart';
 import 'package:pcp/infra/datasource/floor/stable/local_floor_datasource.dart';
@@ -33,11 +27,7 @@ import 'package:pcp/infra/datasource/web_preferences/stable/equip_web_service_da
 import 'package:pcp/infra/datasource/web_preferences/stable/local_web_service_datasource.dart';
 import 'package:pcp/infra/datasource/web_preferences/stable/terceiro_web_service_datasource.dart';
 import 'package:pcp/infra/datasource/web_preferences/stable/visitante_web_service_datasource.dart';
-import 'package:pcp/infra/datasource/web_preferences/variable/config_web_service_datasource.dart';
 import 'package:pcp/infra/repositories/stable/colab_repository_impl.dart';
-import 'package:pcp/infra/repositories/variable/config_repository_impl.dart';
-import 'package:pcp/presenter/initial/config/cubit/config_cubit.dart';
-import 'package:pcp/presenter/initial/senha/cubit/senha_cubit.dart';
 
 void main() {
   setUpAll(() {
@@ -118,12 +108,10 @@ void main() {
   test('Test ColabRepository', () async {
     final object = await getIt.getAsync<ColabRepository>();
     expect(object, isA<ColabRepositoryImpl>());
-
   });
 
   test('Test AddAllColab', () async {
     final object = await getIt.getAsync<AddAllColab>();
     expect(object, isA<AddAllColabImpl>());
   });
-
 }
